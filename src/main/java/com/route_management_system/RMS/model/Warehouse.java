@@ -27,10 +27,10 @@ public class Warehouse {
     @Column(nullable = true)
     private String latitude;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "opening_date")
     private LocalDate openingDate;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "closing_date")
     private LocalDate closingDate;
 
 }
