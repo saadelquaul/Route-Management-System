@@ -8,10 +8,10 @@
 		<version>3.5.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.route_managment_system</groupId>
+	<groupId>com.route_management_system</groupId>
 	<artifactId>RMS</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ROUTE MANAGMENT SYSTEM</name>
+	<name>ROUTE-MANAGEMENT-SYSTEM</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
