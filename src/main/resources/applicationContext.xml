@@ -23,7 +23,7 @@
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
 
-        <property name="packagesToScan" value="com.yourproject.livraison.entity"/>
+        <property name="packagesToScan" value="com.route_management_system.RMS.model"/>
 
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
@@ -44,6 +44,6 @@
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <jpa:repositories base-package="com.route_management_system.repository" />
+    <jpa:repositories base-package="com.route_management_system.RMS.repository" />
 
 </beans>
