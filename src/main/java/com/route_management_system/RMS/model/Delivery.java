@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.Generated;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "deliveries")
@@ -33,11 +33,19 @@ public class Delivery {
     @Column(name = "volume_m3", nullable = false)
     private Double volumeM3;
 
-    @Column(nullable = false, name = "delivery_time")
-    private LocalDateTime deliveryTime;
+    @Column(name = "preferred_time_start")
+    private LocalTime preferredDeliveryTimeStart;
+
+    @Column(name = "preferred_time_end")
+    private LocalTime preferredDeliveryTimeEnd;
 
     @Column(nullable = false, name = "delivery_status")
     @Enumerated(EnumType.STRING)
     private DeliveryStatus status;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tour_id")
+    private Tour tour;
 
 }
