@@ -1,8 +1,8 @@
 package com.route_management_system.RMS.model.enums;
 
 public enum VehicleType {
-        BIKE(50, 0.5);
-
+        BIKE(50, 0.5),
+        VAN(1000, 8);
 
 
         private final double maxWeightKg;
