@@ -1,6 +1,7 @@
 package com.route_management_system.RMS.model;
 
 
+import com.route_management_system.RMS.model.enums.DeliveryStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
