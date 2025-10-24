@@ -17,7 +17,7 @@ public class TourDTO {
     private Long vehicleId;
     private Long warehouseId;
     private TourStatus status;
-    private OptimizationAlgorithmType algorithmType;
+    private OptimizationAlgorithmType algorithmUsed;
     private Double totalDistanceKm;
 
     private List<DeliveryDTO> deliveries;
