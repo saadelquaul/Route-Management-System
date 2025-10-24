@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 @NoArgsConstructor
@@ -16,8 +17,8 @@ public class DeliveryDTO {
     private Double longitude;
     private Double weightKg;
     private Double volumeM3;
-    private LocalDate preferredDeliveryStartTime;
-    private LocalDate preferredDeliveryEndTime;
+    private LocalTime preferredDeliveryStartTime;
+    private LocalTime preferredDeliveryEndTime;
     private DeliveryStatus status;
 
 }
