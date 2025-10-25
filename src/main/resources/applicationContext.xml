@@ -53,6 +53,6 @@
     </bean>
     <bean id="warehouseMapper" name="com.route_management_system.RMS.model.mapper.WarehouseMapper"/>
 
-
+    <bean id="nearestNeighborOptimizer" class="com.route_management_system.RMS.service.NearestNeighborOptimizer"/>
 
 </beans>
