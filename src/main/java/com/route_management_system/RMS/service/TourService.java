@@ -11,7 +11,7 @@ import java.util.List;
 public interface TourService {
 
     double calculateDistance(double warehouseLatitude, double warehouseLongitude, double deliveryLatitude, double deliveryLongitude);
-    Tour getOptimizedTour(Warehouse warehouse, Vehicle vehicle, List<Delivery> pendingDeliveries);
+    TourDTO getOptimizedTour(Long warehouseId, Long vehicleId);
     double getTotalDistance(Long tourId);
     TourDTO findById(Long tourId);
     void deleteTour(Long tourId);
