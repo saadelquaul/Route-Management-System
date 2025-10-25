@@ -30,6 +30,19 @@ public class NearestNeighborOptimizer implements TourOptimizer{
         return null;
     }
 
+    private Delivery findClosestDelivery(double latitude, double longitude, List<Delivery> deliveries) {
+        Delivery closest = null;
+        double minDistance = Double.MAX_VALUE;
 
+        for (Delivery d: deliveries) {
+            double distance = calculateDistance(latitude,longitude,d.getLatitude(), d.getLongitude()) {
+                if(distance < minDistance) {
+                    minDistance = distance;
+                    closest = d;
+                }
+            }
+        }
+        return closest;
+    }
 
 }
