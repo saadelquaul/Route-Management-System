@@ -7,6 +7,7 @@ import com.route_management_system.RMS.repository.VehicleRepository;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Setter
 public class VehicleServiceImpl implements VehicleService{
@@ -30,11 +31,15 @@ public class VehicleServiceImpl implements VehicleService{
 
     @Override
     public List<VehicleDTO> getAllVehicles() {
-        return List.of();
+        return vehicleRepository.findAll().stream().map(vehicleMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override
     public void deleteVehicle(Long vehicleId) {
+        if(!vehicleRepository.existsById(vehicleId)) {
+            throw new RuntimeException("Vehicle not found");
+        }
+        vehicleRepository.deleteById(vehicleId);
 
     }
 }
