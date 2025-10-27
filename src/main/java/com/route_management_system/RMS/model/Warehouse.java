@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 @Data
@@ -22,15 +22,15 @@ public class Warehouse {
     private Long id;
 
     @Column(nullable = false)
-    private String longitude;
+    private Double longitude;
 
     @Column(nullable = true)
-    private String latitude;
+    private Double latitude;
 
     @Column(nullable = false, name = "opening_date")
-    private LocalDate openingDate;
+    private LocalTime openingDate;
 
     @Column(nullable = false, name = "closing_date")
-    private LocalDate closingDate;
+    private LocalTime closingDate;
 
 }

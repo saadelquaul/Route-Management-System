@@ -46,4 +46,13 @@
 
     <jpa:repositories base-package="com.route_management_system.RMS.repository" />
 
+    <bean id="vehicleMapper" class="com.route_management_system.RMS.model.mapper.VehicleMapper"/>
+    <bean id="deliveryMapper" name="com.route_management_system.RMS.model.mapper.DeliveryMapper"/>
+    <bean id="tourMapper" class="com.route_management_system.RMS.model.mapper.TourMapper">
+        <property name="deliveryMapper" ref="deliveryMapper"/>
+    </bean>
+    <bean id="warehouseMapper" name="com.route_management_system.RMS.model.mapper.WarehouseMapper"/>
+
+
+
 </beans>
