@@ -6,6 +6,8 @@ import com.route_management_system.RMS.model.mapper.WarehouseMapper;
 import com.route_management_system.RMS.repository.WarehouseRepository;
 import lombok.Setter;
 
+import java.awt.image.renderable.RenderableImage;
+
 @Setter
 public class WarehouseServiceImpl implements WarehouseService{
 
@@ -21,6 +23,7 @@ public class WarehouseServiceImpl implements WarehouseService{
 
     @Override
     public WarehouseDTO getWarehouseById(Long warehouseId) {
-        return null;
+        Warehouse warehouse =  warehouseRepository.findById(warehouseId).orElseThrow(()-> new RuntimeException("Warehouse not found!"));
+        return warehouseMapper.toDto(warehouse);
     }
 }
