@@ -29,7 +29,9 @@ public class DeliveryServiceImpl implements DeliveryService{
     @Override
     public DeliveryDTO getDeliveryById(Long deliveryId) {
 
-        return null;
+        Delivery delivery  = deliveryRepository.findById(deliveryId).orElseThrow(() -> new RuntimeException("Delivery found!"));
+
+        return deliveryMapper.toDto(delivery);
     }
 
     @Override
