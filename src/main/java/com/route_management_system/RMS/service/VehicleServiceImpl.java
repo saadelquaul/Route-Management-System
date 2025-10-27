@@ -1,5 +1,6 @@
 package com.route_management_system.RMS.service;
 
+import com.route_management_system.RMS.model.Vehicle;
 import com.route_management_system.RMS.model.dto.VehicleDTO;
 import com.route_management_system.RMS.model.mapper.VehicleMapper;
 import com.route_management_system.RMS.repository.VehicleRepository;
@@ -12,9 +13,13 @@ public class VehicleServiceImpl implements VehicleService{
 
     VehicleMapper vehicleMapper;
     VehicleRepository vehicleRepository;
+
+
     @Override
     public VehicleDTO createVehicle(VehicleDTO vehicleDTO) {
-        return null;
+        Vehicle vehicle = vehicleMapper.toEntity(vehicleDTO);
+        Vehicle savedVehicle = vehicleRepository.save(vehicle);
+        return vehicleMapper.toDTO(savedVehicle);
     }
 
     @Override
