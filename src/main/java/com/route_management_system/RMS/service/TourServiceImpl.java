@@ -11,10 +11,12 @@ import com.route_management_system.RMS.repository.DeliveryRepository;
 import com.route_management_system.RMS.repository.TourRepository;
 import com.route_management_system.RMS.repository.VehicleRepository;
 import com.route_management_system.RMS.repository.WarehouseRepository;
+import lombok.Setter;
 
 import java.io.DataInput;
 import java.util.List;
 
+@Setter
 public class TourServiceImpl implements TourService{
 
     private TourRepository tourRepository;
@@ -83,24 +85,4 @@ public class TourServiceImpl implements TourService{
         tourRepository.deleteById(tourId);
     }
 
-    public void setTourRepository(TourRepository tourRepository) {
-        this.tourRepository = tourRepository;
-    }
-
-    public void setVehicleRepository(VehicleRepository vehicleRepository) {
-        this.vehicleRepository = vehicleRepository;
-    }
-
-    public void setWarehouseRepository(WarehouseRepository warehouseRepository) {
-        this.warehouseRepository = warehouseRepository;
-    }
-    public void setDeliveryRepository(DeliveryRepository deliveryRepository) {
-        this.deliveryRepository = deliveryRepository;
-    }
-    public void setTourMapper(TourMapper tourMapper) {
-        this.tourMapper = tourMapper;
-    }
-    public void setTourOptimizer(TourOptimizer tourOptimizer) {
-        this.tourOptimizer = tourOptimizer;
-    }
 }
