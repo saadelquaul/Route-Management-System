@@ -8,6 +8,7 @@ import com.route_management_system.RMS.repository.DeliveryRepository;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Setter
 public class DeliveryServiceImpl implements DeliveryService{
@@ -36,7 +37,7 @@ public class DeliveryServiceImpl implements DeliveryService{
 
     @Override
     public List<DeliveryDTO> getAllDeliveries() {
-        return List.of();
+        return deliveryRepository.findAll().stream().map(deliveryMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
