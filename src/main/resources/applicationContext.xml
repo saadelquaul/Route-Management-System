@@ -77,4 +77,8 @@
         <property name="vehicleRepository" ref="vehicleRepository" />
     </bean>
 
+    <bean id="warehouseController" class="com.route_management_system.RMS.controller.WarehouseController">
+            <property name="warehouseService" ref="warehouseService"/>
+    </bean>
+
 </beans>
