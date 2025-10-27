@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/delivery")
 @Setter
@@ -33,4 +35,9 @@ public class DeliveryController {
         return ResponseEntity.ok(delivery);
     }
 
+    @GetMapping
+    public ResponseEntity<List<DeliveryDTO>> getAllDeliveries() {
+        List<DeliveryDTO> deliveries = deliveryService.getAllDeliveries();
+        return ResponseEntity.ok(deliveries);
+    }
 }
