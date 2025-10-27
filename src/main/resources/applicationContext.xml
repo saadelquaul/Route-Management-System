@@ -67,4 +67,14 @@
 
     </bean>
 
+    <bean id="deliveryService" class="com.route_management_system.RMS.service.DeliveryServiceImpl">
+        <property name="deliveryMapper" ref="deliveryMapper"/>
+        <property name="deliveryRepository" ref="deliveryRepository"/>
+    </bean>
+
+    <bean id="vehicleService" class="com.route_management_system.RMS.service.VehicleServiceImpl">
+        <property name="vehicleMapper" ref="vehicleMapper" />
+        <property name="vehicleRepository" ref="vehicleRepository" />
+    </bean>
+
 </beans>
