@@ -55,4 +55,16 @@
 
     <bean id="nearestNeighborOptimizer" class="com.route_management_system.RMS.service.NearestNeighborOptimizer"/>
 
+    <bean id="tourService" class="com.route_management_system.RMS.service.TourServiceImpl">
+        
+        <property name="tourRepository" ref="tourRepository" />
+        <property name="vehicleRepository" ref="vehicleRepository" />
+        <property name="warehouseRepository" ref="warehouseRepository"/>
+        <property name="deliveryRepository" ref="deliveryRepository"/>
+
+        <property name="tourMapper" ref="tourMapper"/>
+        <property name="tourOptimizer" ref="nearestNeighborOptimizer"/>
+
+    </bean>
+
 </beans>
