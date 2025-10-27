@@ -42,11 +42,20 @@ public class DeliveryServiceImpl implements DeliveryService{
 
     @Override
     public DeliveryDTO updateDeliveryStaus(Long deliveryId, DeliveryStatus newStatus) {
-        return null;
+
+        Delivery delivery = deliveryRepository.findById(deliveryId).orElseThrow(() -> new RuntimeException("Delivery not found"));
+        delivery.setStatus(newStatus);
+        Delivery updatedDelivery= deliveryRepository.save(delivery);
+        return deliveryMapper.toDto(updatedDelivery);
     }
 
     @Override
     public void deleteDelivery(Long deliveryID) {
+        if(!deliveryRepository.existsById(deliveryID)) {
+            throw  new RuntimeException("Delivery not found!");
+        }
+
+        deliveryRepository.deleteById(deliveryID);
 
     }
 }
