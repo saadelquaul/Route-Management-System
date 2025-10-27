@@ -1,16 +1,18 @@
 package com.route_management_system.RMS.controller;
 
 
-import com.route_management_system.RMS.model.Delivery;
+
 import com.route_management_system.RMS.model.dto.DeliveryDTO;
+import com.route_management_system.RMS.model.enums.DeliveryStatus;
 import com.route_management_system.RMS.service.DeliveryService;
 import lombok.Setter;
-import org.apache.coyote.Response;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/delivery")
@@ -42,5 +44,16 @@ public class DeliveryController {
     public ResponseEntity<Void> deleteDelivery(@PathVariable Long id) {
         deliveryService.deleteDelivery(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<DeliveryDTO> updateDeliveryStatus(
+            @PathVariable Long id,
+            @RequestBody Map<String, String> statusUpdate) {
+
+        DeliveryStatus newStatus = DeliveryStatus.valueOf(statusUpdate.get("status"));
+
+        DeliveryDTO updatedDelivery = deliveryService.updateDeliveryStatus(id, newStatus);
+        return ResponseEntity.ok(updatedDelivery);
     }
 }

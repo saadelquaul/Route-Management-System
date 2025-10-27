@@ -11,7 +11,7 @@ public interface DeliveryService {
     DeliveryDTO getDeliveryById(Long deliveryId);
 
     List<DeliveryDTO> getAllDeliveries();
-    DeliveryDTO updateDeliveryStaus(Long deliveryId, DeliveryStatus newStatus);
+    DeliveryDTO updateDeliveryStatus(Long deliveryId, DeliveryStatus newStatus);
     void deleteDelivery(Long deliveryID);
 
     }
