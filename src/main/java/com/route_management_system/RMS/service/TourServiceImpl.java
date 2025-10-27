@@ -55,6 +55,9 @@ public class TourServiceImpl implements TourService{
 
         Tour optimizedTour = tourOptimizer.calculateOptimalTour(warehouse, vehicle, pendingDeliveries);
         Tour savedTour = tourRepository.save(optimizedTour);
+        List<Delivery> deliveries = optimizedTour.getDeliveries();
+        deliveries.forEach(d -> d.setStatus(DeliveryStatus.IN_TRANSIT));
+        deliveryRepository.saveAll(deliveries);
 
         return tourMapper.toDto(savedTour);
     }
