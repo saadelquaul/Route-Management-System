@@ -23,6 +23,7 @@ public class TourMapper {
         dto.setStatus(tour.getStatus());
         dto.setAlgorithmUsed(tour.getAlgorithmUsed());
         dto.setTotalDistanceKm(tour.getTotalDistanceKm());
+        dto.setDate(tour.getDate());
 
         if(tour.getWarehouse() != null) {
             dto.setWarehouseId(tour.getWarehouse().getId());

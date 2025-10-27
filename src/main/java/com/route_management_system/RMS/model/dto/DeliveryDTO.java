@@ -20,5 +20,6 @@ public class DeliveryDTO {
     private LocalTime preferredDeliveryStartTime;
     private LocalTime preferredDeliveryEndTime;
     private DeliveryStatus status;
+    private double totalDistanceFromWarehouse;
 
 }

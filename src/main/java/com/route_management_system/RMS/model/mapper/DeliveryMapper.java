@@ -18,6 +18,7 @@ public class DeliveryMapper {
         dto.setPreferredDeliveryStartTime(delivery.getPreferredDeliveryTimeStart());
         dto.setWeightKg(delivery.getWeightKg());
         dto.setVolumeM3(delivery.getVolumeM3());
+        dto.setTotalDistanceFromWarehouse(delivery.getDistanceFromWarehouse());
         return dto;
     }
 
@@ -32,6 +33,7 @@ public class DeliveryMapper {
         delivery.setVolumeM3(dto.getVolumeM3());
         delivery.setWeightKg(dto.getWeightKg());
         delivery.setPreferredDeliveryTimeStart(dto.getPreferredDeliveryStartTime());
+        delivery.setDistanceFromWarehouse(dto.getTotalDistanceFromWarehouse());
 
         return delivery;
 
