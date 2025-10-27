@@ -81,4 +81,9 @@
             <property name="warehouseService" ref="warehouseService"/>
     </bean>
 
+    <bean id="deliveryController" class="com.route_management_system.RMS.controller.DeliveryController">
+        <property name="deliveryMapper" ref="deliveryMapper"/>
+        <property name="deliveryRepository" ref="deliveryRepository"/>
+    </bean>
+
 </beans>
