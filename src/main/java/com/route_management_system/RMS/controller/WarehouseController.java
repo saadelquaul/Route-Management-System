@@ -8,9 +8,7 @@ import org.springframework.data.repository.support.Repositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/warehouse")
@@ -20,8 +18,16 @@ public class WarehouseController {
     private WarehouseService warehouseService;
 
 
+    @PostMapping
     public ResponseEntity<WarehouseDTO> createWarehouse(@RequestBody WarehouseDTO warehouseDTO){
         WarehouseDTO createdWarehouse = warehouseService.createWarehouse(warehouseDTO);
         return new ResponseEntity<>(createdWarehouse, HttpStatus.CREATED);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<WarehouseDTO> getWarehouseById(@PathVariable Long id) {
+        WarehouseDTO warehouseDTO = warehouseService.getWarehouseById(id);
+        return ResponseEntity.ok(warehouseDTO);
+    }
+
 }
