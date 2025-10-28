@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface WarehouseRepository extends JpaRepository<Warehouse, Long> {
 
-    Optional<Warehouse> findWarehouseByLongitudeAndLatitude(String longitude, String latitude);
+    Optional<Warehouse> findWarehouseByLongitudeAndLatitude(double longitude, double latitude);
 }
