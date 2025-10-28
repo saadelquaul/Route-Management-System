@@ -4,9 +4,7 @@ package com.route_management_system.RMS.model;
 import com.route_management_system.RMS.model.enums.OptimizationAlgorithmType;
 import com.route_management_system.RMS.model.enums.TourStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,7 +13,8 @@ import java.util.List;
 @Table(name = "tours")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 public class Tour {
 
     @Id
@@ -31,7 +30,7 @@ public class Tour {
     private Warehouse warehouse;
 
     @Column(name = "assigned_date")
-    private LocalDate date;
+    private LocalDate tourDate;
 
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @OrderColumn(name = "delivery_sequence")
