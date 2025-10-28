@@ -6,8 +6,6 @@ import com.route_management_system.RMS.model.mapper.WarehouseMapper;
 import com.route_management_system.RMS.repository.WarehouseRepository;
 import lombok.Setter;
 
-import java.awt.image.renderable.RenderableImage;
-
 @Setter
 public class WarehouseServiceImpl implements WarehouseService{
 
