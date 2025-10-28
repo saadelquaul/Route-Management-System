@@ -16,8 +16,8 @@ public class WarehouseMapper {
         dto.setId(warehouse.getId());
         dto.setLatitude(warehouse.getLatitude());
         dto.setLongitude(warehouse.getLongitude());
-        dto.setClosingTime(warehouse.getClosingDate());
-        dto.setOpeningTime(warehouse.getOpeningDate());
+        dto.setClosingTime(warehouse.getClosingTime());
+        dto.setOpeningTime(warehouse.getOpeningTime());
 
         return dto;
     }
@@ -29,8 +29,8 @@ public class WarehouseMapper {
         Warehouse warehouse = new Warehouse();
         warehouse.setLatitude(dto.getLatitude());
         warehouse.setLongitude(dto.getLongitude());
-        warehouse.setClosingDate(dto.getClosingTime());
-        warehouse.setOpeningDate(dto.getOpeningTime());
+        warehouse.setClosingTime(dto.getClosingTime());
+        warehouse.setOpeningTime(dto.getOpeningTime());
 
         return warehouse;
     }
