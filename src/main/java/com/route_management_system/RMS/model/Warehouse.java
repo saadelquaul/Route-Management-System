@@ -3,14 +3,13 @@ package com.route_management_system.RMS.model;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalTime;
 
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "warehouses")
 @AllArgsConstructor
@@ -24,13 +23,13 @@ public class Warehouse {
     @Column(nullable = false)
     private Double longitude;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private Double latitude;
 
-    @Column(nullable = false, name = "opening_date")
-    private LocalTime openingDate;
+    @Column(nullable = false, name = "opening_time")
+    private LocalTime openingTime;
 
-    @Column(nullable = false, name = "closing_date")
-    private LocalTime closingDate;
+    @Column(nullable = false, name = "closing_time")
+    private LocalTime closingTime;
 
 }
