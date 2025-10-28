@@ -4,6 +4,7 @@ package com.route_management_system.RMS.controller;
 import com.route_management_system.RMS.model.dto.WarehouseDTO;
 import com.route_management_system.RMS.service.WarehouseService;
 import lombok.Setter;
+import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
 import org.springframework.data.repository.support.Repositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;

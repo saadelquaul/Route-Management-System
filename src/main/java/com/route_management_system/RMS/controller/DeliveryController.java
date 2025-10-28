@@ -1,14 +1,14 @@
 package com.route_management_system.RMS.controller;
 
 
-
 import com.route_management_system.RMS.model.dto.DeliveryDTO;
 import com.route_management_system.RMS.model.enums.DeliveryStatus;
+import com.route_management_system.RMS.model.mapper.DeliveryMapper;
 import com.route_management_system.RMS.service.DeliveryService;
 import lombok.Setter;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,21 +20,27 @@ import java.util.Map;
 public class DeliveryController {
 
     DeliveryService deliveryService;
+    DeliveryMapper deliveryMapper;
+
+    public DeliveryController(DeliveryService deliveryService, DeliveryMapper deliveryMapper) {
+        this.deliveryMapper = deliveryMapper;
+        this.deliveryService = deliveryService;
+    }
 
 
     @PostMapping
-    public ResponseEntity<DeliveryDTO> createDelivery(DeliveryDTO deliveryDTO) {
+    public ResponseEntity<DeliveryDTO> createDelivery(@RequestBody DeliveryDTO deliveryDTO) {
         DeliveryDTO createdDelivery = deliveryService.createDelivery(deliveryDTO);
         return new ResponseEntity<>(createdDelivery, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DeliveryDTO> getDeliveryById(Long id) {
+    public ResponseEntity<DeliveryDTO> getDeliveryById(@PathVariable Long id) {
         DeliveryDTO delivery = deliveryService.getDeliveryById(id);
         return ResponseEntity.ok(delivery);
     }
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<DeliveryDTO>> getAllDeliveries() {
         List<DeliveryDTO> deliveries = deliveryService.getAllDeliveries();
         return ResponseEntity.ok(deliveries);

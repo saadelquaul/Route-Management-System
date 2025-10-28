@@ -51,7 +51,7 @@ public class NearestNeighborOptimizer implements TourOptimizer{
         tour.setTotalDistanceKm(totalDistance);
         tour.setAlgorithmUsed(OptimizationAlgorithmType.NEAREST_NEIGHBOR);
         tour.setStatus(TourStatus.PENDING);
-        tour.setDate(LocalDate.now());
+        tour.setTourDate(LocalDate.now());
 
         return tour;
 

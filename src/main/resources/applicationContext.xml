@@ -28,12 +28,14 @@
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="showSql" value="${spring.jpa.show-sql}"/>
+                <property name="generateDdl" value="true"/>
             </bean>
         </property>
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.dialect">${spring.jpa.database-platform}</prop>
                 <prop key="hibernate.hbm2ddl.auto">${spring.jpa.hibernate.ddl-auto}</prop>
+                <prop key="hibernate.format_sql">true</prop>
             </props>
         </property>
     </bean>
@@ -44,19 +46,25 @@
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <jpa:repositories base-package="com.route_management_system.RMS.repository" />
+    <jpa:repositories base-package="com.route_management_system.RMS.repository"
+                      entity-manager-factory-ref="entityManagerFactory"
+                      transaction-manager-ref="transactionManager"/>
+
+    <!--    ========  Mapper Beans ======= -->
 
     <bean id="vehicleMapper" class="com.route_management_system.RMS.model.mapper.VehicleMapper"/>
-    <bean id="deliveryMapper" name="com.route_management_system.RMS.model.mapper.DeliveryMapper"/>
+    <bean id="deliveryMapper" class="com.route_management_system.RMS.model.mapper.DeliveryMapper"/>
     <bean id="tourMapper" class="com.route_management_system.RMS.model.mapper.TourMapper">
         <property name="deliveryMapper" ref="deliveryMapper"/>
     </bean>
-    <bean id="warehouseMapper" name="com.route_management_system.RMS.model.mapper.WarehouseMapper"/>
+    <bean id="warehouseMapper" class="com.route_management_system.RMS.model.mapper.WarehouseMapper"/>
 
+
+    <!-- ================== Service Beans ================== -->
     <bean id="nearestNeighborOptimizer" class="com.route_management_system.RMS.service.NearestNeighborOptimizer"/>
 
     <bean id="tourService" class="com.route_management_system.RMS.service.TourServiceImpl">
-        
+
         <property name="tourRepository" ref="tourRepository" />
         <property name="vehicleRepository" ref="vehicleRepository" />
         <property name="warehouseRepository" ref="warehouseRepository"/>
@@ -77,13 +85,28 @@
         <property name="vehicleRepository" ref="vehicleRepository" />
     </bean>
 
+
+    <!-- ======= Controller Beans ======== -->
     <bean id="warehouseController" class="com.route_management_system.RMS.controller.WarehouseController">
             <property name="warehouseService" ref="warehouseService"/>
     </bean>
 
     <bean id="deliveryController" class="com.route_management_system.RMS.controller.DeliveryController">
-        <property name="deliveryMapper" ref="deliveryMapper"/>
-        <property name="deliveryRepository" ref="deliveryRepository"/>
+        <property name="deliveryService" ref="deliveryService"/>
+        <constructor-arg ref="warehouseMapper"/>
     </bean>
+
+    <bean id="vehicleController" class="com.route_management_system.RMS.controller.VehicleController">
+    <property name="vehicleMapper" ref="vehicleMapper"/>
+    <property name="vehicleService" ref="vehicleService"/>
+    </bean>
+
+    <bean id="warehouseService" class="com.route_management_system.RMS.service.WarehouseServiceImpl">
+        <property name="warehouseMapper" ref="warehouseMapper"/>
+        <property name="warehouseRepository" ref="warehouseRepository"/>
+    </bean>
+
+
+
 
 </beans>
