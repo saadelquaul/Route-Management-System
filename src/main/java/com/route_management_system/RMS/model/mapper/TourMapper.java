@@ -2,9 +2,11 @@ package com.route_management_system.RMS.model.mapper;
 
 import com.route_management_system.RMS.model.Tour;
 import com.route_management_system.RMS.model.dto.TourDTO;
+import lombok.Setter;
 
 import java.util.stream.Collectors;
 
+@Setter
 public class TourMapper {
 
     private DeliveryMapper deliveryMapper;
@@ -23,7 +25,7 @@ public class TourMapper {
         dto.setStatus(tour.getStatus());
         dto.setAlgorithmUsed(tour.getAlgorithmUsed());
         dto.setTotalDistanceKm(tour.getTotalDistanceKm());
-        dto.setDate(tour.getDate());
+        dto.setDate(tour.getTourDate());
 
         if(tour.getWarehouse() != null) {
             dto.setWarehouseId(tour.getWarehouse().getId());
