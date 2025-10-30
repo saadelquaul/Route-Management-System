@@ -21,5 +21,6 @@ public class DeliveryDTO {
     private LocalTime preferredDeliveryEndTime;
     private DeliveryStatus status;
     private double totalDistanceFromWarehouse;
+    private Long warehouseId;
 
 }
