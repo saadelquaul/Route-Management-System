@@ -78,6 +78,8 @@
     <bean id="deliveryService" class="com.route_management_system.RMS.service.DeliveryServiceImpl">
         <property name="deliveryMapper" ref="deliveryMapper"/>
         <property name="deliveryRepository" ref="deliveryRepository"/>
+        <property name="warehouseRepository" ref="warehouseRepository"/>
+        <property name="tourService" ref="tourService"/>
     </bean>
 
     <bean id="vehicleService" class="com.route_management_system.RMS.service.VehicleServiceImpl">
@@ -104,6 +106,11 @@
     <bean id="warehouseService" class="com.route_management_system.RMS.service.WarehouseServiceImpl">
         <property name="warehouseMapper" ref="warehouseMapper"/>
         <property name="warehouseRepository" ref="warehouseRepository"/>
+    </bean>
+
+    <bean id="tourController" class="com.route_management_system.RMS.controller.TourController">
+        <property name="tourService" ref="tourService"/>
+
     </bean>
 
 
