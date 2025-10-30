@@ -14,5 +14,7 @@ public interface TourService {
     TourDTO getOptimizedTour(Long warehouseId, Long vehicleId);
     double getTotalDistance(Long tourId);
     TourDTO findById(Long tourId);
-    void deleteTour(Long tourId);
+    boolean deleteTour(Long tourId);
+    List<Tour> getAllTours();
+    TourDTO getOptimizedTourByClarkeAndWright(Long warehouseId, Long vehicleId);
 }
