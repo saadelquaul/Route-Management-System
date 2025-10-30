@@ -31,6 +31,9 @@ public class TourMapper {
             dto.setWarehouseId(tour.getWarehouse().getId());
         }
 
+        if(tour.getVehicle() != null) {
+            dto.setVehicleId(tour.getVehicle().getId());
+        }
         if(tour.getDeliveries() != null) {
             dto.setDeliveries(tour.getDeliveries().stream()
                     .map(deliveryMapper::toDto)
