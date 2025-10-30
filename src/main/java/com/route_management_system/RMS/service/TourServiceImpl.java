@@ -11,58 +11,79 @@ import com.route_management_system.RMS.repository.DeliveryRepository;
 import com.route_management_system.RMS.repository.TourRepository;
 import com.route_management_system.RMS.repository.VehicleRepository;
 import com.route_management_system.RMS.repository.WarehouseRepository;
-import lombok.Setter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
-import java.io.DataInput;
 import java.util.List;
 
-@Setter
+@Service
 public class TourServiceImpl implements TourService{
 
-    private TourRepository tourRepository;
-    private VehicleRepository vehicleRepository;
-    private WarehouseRepository warehouseRepository;
-    private DeliveryRepository deliveryRepository;
-    private TourMapper tourMapper;
-    private TourOptimizer tourOptimizer;
+    private final TourRepository tourRepository;
+    private final VehicleRepository vehicleRepository;
+    private final WarehouseRepository warehouseRepository;
+    private final DeliveryRepository deliveryRepository;
+    private final TourMapper tourMapper;
+    private final TourOptimizer nearestNeighborOptimizer;
+    private final TourOptimizer clarkeWrightOptimizer;
 
-
-
-
-
-
-
-
-    @Override
-    public double calculateDistance(double warehouseLatitude, double warehouseLongitude, double deliveryLatitude, double deliveryLongitude) {
-        final int R = 6371;
-
-        double latDistance = Math.toRadians(deliveryLatitude - warehouseLatitude);
-        double lonDistance = Math.toRadians(deliveryLongitude - warehouseLongitude);
-
-        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
-                + Math.cos(Math.toRadians(warehouseLatitude)) * Math.cos(Math.toRadians(deliveryLatitude))
-                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-        return R * c;
+    public TourServiceImpl(
+            TourRepository tourRepository,
+            VehicleRepository vehicleRepository,
+            WarehouseRepository warehouseRepository,
+            DeliveryRepository deliveryRepository,
+            TourMapper tourMapper,
+            @Qualifier("nearestNeighborOptimizer") TourOptimizer nearestNeighborOptimizer,
+            @Qualifier("clarkeWrightOptimizer") TourOptimizer clarkeWrightOptimizer) {
+        this.tourRepository = tourRepository;
+        this.vehicleRepository = vehicleRepository;
+        this.warehouseRepository = warehouseRepository;
+        this.deliveryRepository = deliveryRepository;
+        this.tourMapper = tourMapper;
+        this.nearestNeighborOptimizer = nearestNeighborOptimizer;
+        this.clarkeWrightOptimizer = clarkeWrightOptimizer;
     }
 
+
+
+
+
+
+
+
+
     @Override
-    public TourDTO getOptimizedTour(Long warehouseId, Long vehicleId) {
+    public TourDTO getOptimizedTour(Long warehouseId, Long vehicleId, String algorithmUsedName) {
+
 
         Warehouse warehouse = warehouseRepository.findById(warehouseId).orElseThrow(() -> new RuntimeException("Warehouse not found!"));
         Vehicle vehicle = vehicleRepository.findById(vehicleId).orElseThrow(() -> new RuntimeException("Vehicle not found!"));
         List<Delivery> pendingDeliveries = deliveryRepository.findByStatus(DeliveryStatus.PENDING);
 
-        Tour optimizedTour = tourOptimizer.calculateOptimalTour(warehouse, vehicle, pendingDeliveries);
-        List<Delivery> deliveries = optimizedTour.getDeliveries();
-        deliveries.forEach(d -> d.setStatus(DeliveryStatus.IN_TRANSIT));
-        deliveryRepository.saveAll(deliveries);
+
+        TourOptimizer chosenOptimizer;
+        if ("CLARKE_WRIGHT".equalsIgnoreCase(algorithmUsedName)) {
+            chosenOptimizer = clarkeWrightOptimizer;
+        } else if ("NEAREST_NEIGHBOR".equalsIgnoreCase(algorithmUsedName)) {
+            chosenOptimizer = nearestNeighborOptimizer;
+        } else {
+            chosenOptimizer = clarkeWrightOptimizer;
+        }
+
+        Tour optimizedTour = chosenOptimizer.calculateOptimalTour(warehouse, vehicle, pendingDeliveries);
         Tour savedTour = tourRepository.save(optimizedTour);
+
+        List<Delivery> deliveries = optimizedTour.getDeliveries();
+        deliveries.forEach(d -> {
+            d.setStatus(DeliveryStatus.IN_TRANSIT);
+            d.setTour(savedTour);
+        });
+        deliveryRepository.saveAll(deliveries);
 
         return tourMapper.toDto(savedTour);
     }
+
 
     @Override
     public double getTotalDistance(Long tourId) {
@@ -78,11 +99,25 @@ public class TourServiceImpl implements TourService{
     }
 
     @Override
-    public void deleteTour(Long tourId) {
+    public boolean deleteTour(Long tourId) {
         if(!tourRepository.existsById(tourId)) {
             throw new RuntimeException("Tour not found!");
+
         }
         tourRepository.deleteById(tourId);
+        return true;
     }
+
+    @Override
+    public List<Tour> getAllTours() {
+        return tourRepository.findAll();
+    }
+
+    @Override
+    public TourDTO getOptimizedTourByClarkeAndWright(Long warehouseId, Long vehicleId) {
+
+        return null;
+    }
+
 
 }
