@@ -62,7 +62,7 @@
 
     <!-- ================== Service Beans ================== -->
     <bean id="nearestNeighborOptimizer" class="com.route_management_system.RMS.service.NearestNeighborOptimizer"/>
-
+    <bean id="clarkeWrightOptimizer" class="com.route_management_system.RMS.service.ClarkeWrightOptimizer"/>
     <bean id="tourService" class="com.route_management_system.RMS.service.TourServiceImpl">
 
         <property name="tourRepository" ref="tourRepository" />
@@ -71,7 +71,8 @@
         <property name="deliveryRepository" ref="deliveryRepository"/>
 
         <property name="tourMapper" ref="tourMapper"/>
-        <property name="tourOptimizer" ref="nearestNeighborOptimizer"/>
+        <property name="nearestNeighborOptimizer" ref="nearestNeighborOptimizer" />
+        <property name="clarkeWrightOptimizer" ref="clarkeWrightOptimizer" />
 
     </bean>
 
