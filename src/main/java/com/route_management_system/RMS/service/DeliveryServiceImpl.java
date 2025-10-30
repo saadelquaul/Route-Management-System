@@ -28,7 +28,7 @@ public class DeliveryServiceImpl implements DeliveryService{
         Warehouse warehouse = warehouseRepository.findById(deliveryDTO.getWarehouseId()).orElseThrow(()-> new RuntimeException("Warehouse not found!"));
         Delivery delivery  = deliveryMapper.toEntity(deliveryDTO);
         delivery.setStatus(DeliveryStatus.PENDING);
-        delivery.setDistanceFromWarehouse(tourService.calculateDistance(warehouse.getLatitude(), warehouse.getLongitude(), delivery.getLatitude(), delivery.getLongitude()));
+        delivery.setDistanceFromWarehouse(calculateDistance(warehouse.getLatitude(), warehouse.getLongitude(), delivery.getLatitude(), delivery.getLongitude()));
 
         Delivery savedDelivery = deliveryRepository.save(delivery);
         return deliveryMapper.toDto(savedDelivery);
@@ -64,5 +64,16 @@ public class DeliveryServiceImpl implements DeliveryService{
 
         deliveryRepository.deleteById(deliveryID);
 
+    }
+
+    private double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+        final int R = 6371; // Radius of Earth in KM
+        double latDistance = Math.toRadians(lat2 - lat1);
+        double lonDistance = Math.toRadians(lon2 - lon1);
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c;
     }
 }
