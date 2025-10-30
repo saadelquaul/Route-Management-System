@@ -11,7 +11,6 @@ import com.route_management_system.RMS.repository.DeliveryRepository;
 import com.route_management_system.RMS.repository.TourRepository;
 import com.route_management_system.RMS.repository.VehicleRepository;
 import com.route_management_system.RMS.repository.WarehouseRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 

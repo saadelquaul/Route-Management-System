@@ -5,7 +5,6 @@ import com.route_management_system.RMS.model.enums.DeliveryStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Data

@@ -18,8 +18,6 @@ public class DeliveryServiceImpl implements DeliveryService{
     private WarehouseRepository warehouseRepository;
     private DeliveryRepository deliveryRepository;
     private DeliveryMapper deliveryMapper;
-    private TourService tourService;
-
 
 
     @Override
