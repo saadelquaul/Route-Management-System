@@ -29,11 +29,12 @@ public class NearestNeighborOptimizer implements TourOptimizer{
         double totalVolumeM3 = 0.0;
 
         for(Delivery d: orderedDeliveriesByDistance) {
-            totalWeightKg += d.getWeightKg();
-            totalVolumeM3 += d.getVolumeM3();
+
             if(totalWeightKg > vehicle.getMaxWeightKg() || totalVolumeM3 > vehicle.getMaxVolumeM3()) {
                 break;
             }
+            totalWeightKg += d.getWeightKg();
+            totalVolumeM3 += d.getVolumeM3();
             totalDistance += d.getDistanceFromWarehouse();
             tourDeliveries.add(d);
         }
